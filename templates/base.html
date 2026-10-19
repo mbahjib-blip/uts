@@ -1,0 +1,19 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Klasifikasi Diabetes - Decision Tree</title>
+<style>
+:root{--bg:#f8fafc;--fg:#0f172a;--card:#fff;--ac:#2563eb;--bd:#e2e8f0}
+@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--fg:#e2e8f0;--card:#1e293b;--ac:#60a5fa;--bd:#334155}}
+body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
+nav{background:var(--card);border-bottom:1px solid var(--bd);padding:.8rem 1rem;display:flex;gap:1rem;flex-wrap:wrap}
+nav a{color:var(--ac);text-decoration:none;font-weight:600}
+main{max-width:900px;margin:1.5rem auto;padding:0 1rem}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem}
+table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{border:1px solid var(--bd);padding:.35rem .6rem;text-align:center}
+.scroll{overflow-x:auto}img{max-width:100%}
+input{width:100%;padding:.5rem;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--fg);box-sizing:border-box}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem}
+button{background:var(--ac);color:#fff;border:0;padding:.6rem 1.2rem;border-radius:6px;font-weight:600;cursor:pointer;margin-top:1rem}
+.big{font-size:1.6rem;font-weight:700}.ok{color:#16a34a}.bad{color:#dc2626}
+</style></head><body>
+<nav><a href="/">Dataset &amp; Preprocessing</a><a href="/evaluasi">Evaluasi Model</a><a href="/prediksi">Uji Data Baru</a><a href="/perbandingan">Perbandingan Jurnal</a></nav>
+<main>{% block c %}{% endblock %}</main></body></html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block c %}
+<h1>Perbandingan dengan Jurnal Rujukan</h1>
+{% set m=M.metrics %}
+<div class="card"><p><b>Jurnal rujukan:</b> <i>Classification of Type 2 Diabetes using Decision Tree Algorithm</i>, JAICT Vol. 8 No. 2, 2023 (dataset diabetes dari UCI Repository; akurasi dilaporkan <b>95,96%</b>).</p>
+<table><tr><th></th><th>Jurnal</th><th>Project ini</th></tr>
+<tr><td>Accuracy</td><td>95,96%</td><td>{{ '%.2f'|format(m.accuracy*100) }}%</td></tr></table></div>
+<div class="card"><h2>Persamaan</h2><ul><li>Algoritma sama (Decision Tree) dan dataset berasal dari repositori UCI/Kaggle yang sama keluarganya (diabetes).</li><li>Evaluasi memakai Accuracy (dan metrik confusion matrix).</li></ul>
+<h2>Perbedaan &amp; kemungkinan penyebab</h2><ul>
+<li><b>Data duplikat/leakage:</b> dataset Kaggle 2000 baris berisi {{ M.info.duplikat }} duplikat. Tanpa dihapus, akurasi project ini mencapai {{ '%.2f'|format(M.metrics_dengan_duplikat.accuracy*100) }}%, mendekati angka jurnal. Setelah dihapus turun ke {{ '%.2f'|format(m.accuracy*100) }}%.</li>
+<li><b>Dataset berbeda versi:</b> perlu dicek jumlah data dan fitur yang dipakai jurnal (UCI Early Stage Diabetes vs Pima).</li>
+<li><b>Preprocessing &amp; pembagian data:</b> penanganan nilai 0, rasio split, dan cross-validation bisa berbeda.</li>
+<li><b>Hyperparameter:</b> kedalaman pohon, kriteria split, dan pruning memengaruhi akurasi.</li></ul>
+<p><small>Lengkapi bagian ini dengan detail dari PDF jurnal (jumlah data, split, parameter) setelah dibaca langsung.</small></p></div>
+{% endblock %}

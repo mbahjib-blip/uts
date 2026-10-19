@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block c %}
+<h1>Uji Data Baru</h1>
+<div class="card"><form method="post"><div class="grid">
+{% for k,l in FITUR %}<label>{{ l }}<input name="{{k}}" type="number" step="any" min="0" required value="{{ nilai.get(k,'') }}"></label>{% endfor %}
+</div><p><small>Isi 0 pada Glukosa, Tekanan Darah, Lipatan Kulit, Insulin, atau BMI jika tidak diketahui (akan diisi median).</small></p>
+<button type="submit">Prediksi</button></form></div>
+{% if hasil %}<div class="card">{% if hasil.error %}<p class="bad">{{ hasil.error }}</p>
+{% else %}<p class="big {{ 'bad' if hasil.p else 'ok' }}">{{ hasil.label }}</p><p>Keyakinan model: {{ hasil.prob }}%</p>
+<p><small>Hasil ini hanya untuk keperluan tugas kuliah, bukan diagnosis medis.</small></p>{% endif %}</div>{% endif %}
+{% endblock %}

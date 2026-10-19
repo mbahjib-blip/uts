@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block c %}
+<h1>Klasifikasi Diabetes dengan Decision Tree</h1>
+<div class="card"><h2>Sumber &amp; Karakteristik Dataset</h2>
+<p>Dataset <b>Diabetes (Pima Indians)</b> dari Kaggle (asal: National Institute of Diabetes and Digestive and Kidney Diseases, tersedia di UCI Machine Learning Repository). Berisi data pasien perempuan keturunan Pima, usia ≥ 21 tahun.</p>
+<ul><li>Jumlah baris awal: <b>{{ M.info.baris_awal }}</b>, 8 fitur numerik + 1 target (<code>Outcome</code>: 1 = diabetes, 0 = tidak)</li>
+<li>Baris duplikat: <b>{{ M.info.duplikat }}</b> → setelah dihapus tersisa <b>{{ M.info.baris_bersih }}</b> baris ({{ M.info.kelas['0'] }} tidak diabetes, {{ M.info.kelas['1'] }} diabetes)</li></ul>
+<div class="scroll">{{ sample|safe }}</div></div>
+<div class="card"><h2>Preprocessing</h2><ol>
+<li>Menghapus kolom kosong tambahan hasil pemisah ";" pada CSV.</li>
+<li><b>Menghapus data duplikat</b>. Tanpa langkah ini, baris yang sama muncul di data latih dan uji sehingga akurasi menggembung (data leakage). Perbandingan hasil ada di halaman Evaluasi.</li>
+<li>Nilai 0 yang mustahil secara medis pada Glucose, BloodPressure, SkinThickness, Insulin, BMI dianggap <i>missing</i>, lalu diisi <b>median</b>:
+<div class="scroll"><table><tr>{% for k,v in M.info.nol_per_kolom.items() %}<th>{{k}}</th>{% endfor %}</tr><tr>{% for k,v in M.info.nol_per_kolom.items() %}<td>{{v}}</td>{% endfor %}</tr></table></div></li>
+<li>Pembagian data: <b>80% latih ({{ M.metrics.n_train }})</b> dan <b>20% uji ({{ M.metrics.n_test }})</b>, stratified, random_state=42.</li>
+<li>Model: <code>DecisionTreeClassifier</code>, hyperparameter dipilih dengan GridSearchCV (5-fold): {{ M.metrics.params }}.</li></ol></div>
+{% endblock %}

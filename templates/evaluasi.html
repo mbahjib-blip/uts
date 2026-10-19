@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block c %}
+<h1>Evaluasi Model</h1>
+{% set m=M.metrics %}{% set d=M.metrics_dengan_duplikat %}
+<div class="card"><h2>Hasil pada data uji (duplikat dihapus)</h2>
+<table><tr><th>Accuracy</th><th>Precision</th><th>Recall</th></tr>
+<tr><td class="big">{{ '%.2f'|format(m.accuracy*100) }}%</td><td class="big">{{ '%.2f'|format(m.precision*100) }}%</td><td class="big">{{ '%.2f'|format(m.recall*100) }}%</td></tr></table>
+<h3>Confusion Matrix</h3><img src="/static/cm.png" alt="Confusion matrix" style="max-width:380px">
+<p>TN={{ m.cm[0][0] }}, FP={{ m.cm[0][1] }}, FN={{ m.cm[1][0] }}, TP={{ m.cm[1][1] }}</p></div>
+<div class="card"><h2>Pengaruh data duplikat</h2>
+<p>Jika duplikat <b>tidak</b> dihapus, hasilnya terlihat jauh lebih tinggi, tetapi tidak valid karena baris yang sama bisa ada di data latih dan data uji.</p>
+<table><tr><th></th><th>Accuracy</th><th>Precision</th><th>Recall</th></tr>
+<tr><td>Dengan duplikat (2000 baris)</td><td>{{ '%.2f'|format(d.accuracy*100) }}%</td><td>{{ '%.2f'|format(d.precision*100) }}%</td><td>{{ '%.2f'|format(d.recall*100) }}%</td></tr>
+<tr><td>Tanpa duplikat ({{ M.info.baris_bersih }} baris)</td><td>{{ '%.2f'|format(m.accuracy*100) }}%</td><td>{{ '%.2f'|format(m.precision*100) }}%</td><td>{{ '%.2f'|format(m.recall*100) }}%</td></tr></table></div>
+<div class="card"><h2>Feature Importance &amp; Pohon Keputusan</h2><img src="/static/fi.png" alt="Feature importance" style="max-width:480px"><img src="/static/tree.png" alt="Pohon keputusan (kedalaman 3)"></div>
+{% endblock %}
